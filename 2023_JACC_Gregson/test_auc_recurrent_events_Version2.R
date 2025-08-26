@@ -2,7 +2,7 @@
 library(survival)
 library(ggplot2)
 
-
+# Shahrad
 # This code uses the reda package for mean cumulative function (MCF) and AUC estimation for recurrent events.
 # The AUC here is the area under the MCF curve, which estimates the mean total number of events per subject up to a fixed time (e.g., 5).
 # Treatment group differences in AUC reflect differences in expected recurrent event burden.
