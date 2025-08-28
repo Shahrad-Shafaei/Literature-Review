@@ -1,0 +1,67 @@
+---
+title: "models"
+output: html_document
+date: "2025-08-28"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+## Statistical Methods for Recurrent Events
+
+This paper evaluates several statistical models designed to analyze either the first event or the total number of events. Here’s a simple breakdown of each.
+
+### 1. **Cox Proportional-Hazards Model (Cox)**
+
+-   **Purpose:** This is the **gold standard for time-to-first-event analysis**.
+
+-   **How it Works:** It models the risk (or "hazard") of experiencing an event at any given time, assuming the effect of a treatment (like a drug) is constant over time. It follows patients until they have their first event, and then they are no longer tracked ("censored").
+
+-   **Analogy:** It’s like a race to a single finish line. The model analyzes who gets there first, but it doesn't care what happens after they cross it.
+
+### 2. **Negative Binomial (NB) Model**
+
+-   **Purpose:** To analyze the **rate of events** over a period.
+
+-   **How it Works:** This model doesn't focus on *when* events happen, but rather *how many* happen for each person. It's useful when the event counts vary a lot between individuals (i.e., when there is high heterogeneity).
+
+-   **Analogy:** It’s like counting the number of times a customer visits a store in a year. It focuses on the total count (`5 visits`) rather than the specific dates of the visits.
+
+### 3. **Andersen-Gill (AG) Model**
+
+-   **Purpose:** A popular and powerful way to analyze **total recurrent events over time**.
+
+-   **How it Works:** It adapts the Cox model for multiple events. It treats each event as an independent occurrence and resets the "at-risk" clock for that patient. It looks at the time gap between successive events.
+
+-   **Analogy:** It’s like a race with multiple laps. After a patient finishes a lap (has an event), the model immediately starts timing their next lap.
+
+### 4. **Prentice-Williams-Peterson (PWP) Models**
+
+-   **Purpose:** To analyze ordered recurrent events, where the risk of a future event might change after a prior one.
+
+-   **How it Works:** These are more complex models that stratify the analysis by event number. For example, they model the risk of the *first* event, then separately model the risk of the *second* event (only among those who had a first), and so on. There are two main versions:
+
+    -   **PWP-Total Time:** Measures time from the start of the study.
+
+    -   **PWP-Gap Time:** Measures time from the previous event.
+
+-   **Analogy:** It’s like analyzing performance in a multi-stage race. It looks at the time to complete Stage 1, then the time to complete Stage 2, acknowledging that the two might be different.
+
+### 5. **Wei-Lin-Weissfeld (WLW) Model**
+
+-   **Purpose:** To analyze multiple types of events or recurrent events without making strong assumptions about how they are related.
+
+-   **How it Works:** It's a "marginal" model. It creates a separate Cox model for each event number (e.g., one for the 1st event, one for the 2nd, etc.) and then combines the results. It doesn't assume that having a first event makes a second one more or less likely.
+
+-   **Analogy:** It's like having separate judges for the 100m, 200m, and 400m races at a track meet. Each event is judged independently, and the results are then compiled to get an overall picture of a runner's performance.
+
+### 6. **Lin-Wei-Yang-Ying (LWYY) Model**
+
+-   **Purpose:** A **highly robust** model for total recurrent events that is less sensitive to the underlying event patterns.
+
+-   **How it Works:** This is also a "marginal" model, similar to WLW, but it includes an adjustment that makes it more reliable, especially when the number of total events is high or when there is significant heterogeneity. It is often recommended when you are unsure about the exact nature of the patient's risk over time.
+
+-   **Analogy:** It’s like the head official at a track meet who combines the results from all the individual race judges (like the WLW model) but also applies a correction factor to account for overall track conditions that might have affected all the races. This makes the final result more robust.
